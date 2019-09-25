@@ -17,7 +17,7 @@ What things you need to install the software and how to install them
 
 
 ### Installing
-Download this repo
+Clone this repo
 
 1. Install node_modules
 ```bash
