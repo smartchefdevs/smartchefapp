@@ -10,12 +10,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-```
-  - [Node] (https://nodejs.org/es/download/)
+  - [Node](https://nodejs.org/es/download/)
   - [React Native](https://facebook.github.io/react-native/docs/getting-started)
   - react-native-cli
   - Android studio / Xcode
-```
+
 
 ### Installing
 Download this repo
