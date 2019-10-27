@@ -5,15 +5,15 @@ import {
   View,
   Text
 } from 'react-native';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 /** styles */
-import { Colors } from 'amissa/src/styles/Colors'
-import FONTS from 'amissa/src/styles/Fonts';
+import { Colors } from 'smartchef/src/styles/Colors'
+import FONTS from 'smartchef/src/styles/Fonts';
 /** components */
-import { FormItem } from 'amissa/src/components/form/FormItem'
-import ButtonRound from 'amissa/src/components/Button.comp'
-import Label from 'amissa/src/components/Label'
+import { FormItem } from 'smartchef/src/components/form/FormItem'
+import ButtonRound from 'smartchef/src/components/Button.comp';
+import Label from 'smartchef/src/components/Label';
 
 const styles = StyleSheet.create({
   container: {

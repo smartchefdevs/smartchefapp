@@ -1,22 +1,18 @@
 import React from "react";
 import { View, Text, Button, ActivityIndicator, StatusBar } from "react-native";
 import MdIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  createBottomTabNavigator,
-  createStackNavigator,
-  createAppContainer,
-  createSwitchNavigator
-} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 // screen
-import LoginScreen from 'amissa/src/scenes/login/login.container';
-import RegisterScreen from 'amissa/src/scenes/register/register.container';
-import HomeScreen from 'amissa/src/scenes/home/home.container'
-import PublishScreen from 'amissa/src/scenes/publish/publish.container'
-import AccountScreen from 'amissa/src/scenes/account/account.screen'
+import LoginScreen from 'smartchef/src/scenes/login/login.container';
+import RegisterScreen from 'smartchef/src/scenes/register/register.container';
+// import HomeScreen from 'smartchef/src/scenes/home/home.container';
+// import PublishScreen from 'smartchef/src/scenes/publish/publish.container';
+// import AccountScreen from 'smartchef/src/scenes/account/account.screen';
 // utils
-import { Colors } from 'amissa/src/styles/Colors';
-import { verifyUser } from 'amissa/src/common/firebase.auth'
+import { Colors } from 'smartchef/src/styles/Colors';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -26,7 +22,7 @@ class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    const userToken = await verifyUser();
+    const userToken = false;
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
@@ -55,10 +51,9 @@ const defaultScreen = () => {
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: HomeScreen,
+    Home: defaultScreen,
     Search: defaultScreen,
-    Loss: PublishScreen,
-    Account: AccountScreen
+    Account: defaultScreen
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -73,7 +68,7 @@ const TabNavigator = createBottomTabNavigator(
           // IconComponent = HomeIconWithBadge;
         } else if (routeName === 'Search') {
           iconName = `briefcase-search${focused ? '' : '-outline'}`;
-        } else if(routeName === 'Loss'){
+        } else if (routeName === 'Loss') {
           iconName = `briefcase-plus${focused ? '' : '-outline'}`;
         }
 
@@ -88,7 +83,10 @@ const TabNavigator = createBottomTabNavigator(
   });
 
 const AuthStack = createStackNavigator(
-  { SignIn: LoginScreen, Register: RegisterScreen },
+  {
+    SignIn: LoginScreen,
+    Register: RegisterScreen,
+  },
   { headerMode: 'none' }
 );
 

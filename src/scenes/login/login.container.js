@@ -1,14 +1,14 @@
-import React from 'react'
-import { StatusBar, Keyboard } from 'react-native'
-import auth from '@react-native-firebase/auth';
+import React from 'react';
+import { StatusBar, Keyboard } from 'react-native';
+// import auth from '@react-native-firebase/auth';
 
 // components
-import LoginForm from 'amissa/src/scenes/login/login.form'
+import LoginForm from 'smartchef/src/scenes/login/login.form';
 import {
   MainView, BackgroundView, TitleView, WraperLabel, LinkButton, LinksView
-} from 'amissa/src/components/auth';
-import Label from 'amissa/src/components/Label'
-import { Colors } from 'amissa/src/styles/Colors';
+} from 'smartchef/src/components/auth';
+import Label from 'smartchef/src/components/Label'
+import { Colors } from 'smartchef/src/styles/Colors';
 
 class loginScreen extends React.PureComponent {
   static navigationOptions = {
@@ -59,19 +59,13 @@ class loginScreen extends React.PureComponent {
   };
 
   _logIn = signUp => {
-    const { email, password } = signUp;
-    const { navigation } = this.props;
-    try {
-      auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(user => {
-          navigation.navigate('Home')
-          console.log('signIn', user)
-        })
-        .catch(error => console.error(error));
-    } catch (e) {
-      console.error(e.message);
-    }
+    // const { email, password } = signUp;
+    // const { navigation } = this.props;
+    // try {
+
+    // } catch (e) {
+    //   console.error(e.message);
+    // }
   };
   _goSignIn = () => {
     const { navigation } = this.props;

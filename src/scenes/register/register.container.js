@@ -1,17 +1,16 @@
 import React from 'react';
-import { View, StatusBar, Keyboard } from 'react-native';
-import auth from '@react-native-firebase/auth';;
+import { StatusBar, Keyboard } from 'react-native';
 import { GoogleSignin } from 'react-native-google-signin';
 
 // components
-import RegisterForm from 'amissa/src/scenes/register/register.form';
+import RegisterForm from 'smartchef/src/scenes/register/register.form';
 import {
   MainView, BackgroundView, TitleView, WraperLabel, LinkButton, LinksView
-} from 'amissa/src/components/auth';
-import { loginWithFacebook } from 'amissa/src/common/firebase.auth'
+} from 'smartchef/src/components/auth';
+import { loginWithFacebook } from 'smartchef/src/common/firebase.auth'
 
-import Label from 'amissa/src/components/Label';
-import { Colors } from 'amissa/src/styles/Colors';
+import Label from 'smartchef/src/components/Label';
+import { Colors } from 'smartchef/src/styles/Colors';
 
 class registerScreen extends React.PureComponent {
   static navigationOptions = {
@@ -52,11 +51,8 @@ class registerScreen extends React.PureComponent {
     const { navigation } = this.props;
     try {
       const { accessToken, idToken } = await GoogleSignin.signIn();
-      const credential = auth.GoogleAuthProvider.credential(
-        idToken,
-        accessToken
-      );
-      const user = await auth().signInWithCredential(credential);
+    
+      // const user = await auth().signInWithCredential(credential);
       navigation.navigate("Home")
       console.log("el user", user, credential);
     } catch (error) {
@@ -80,15 +76,15 @@ class registerScreen extends React.PureComponent {
   };
 
   _signIn = signUp => {
-    const { email, password } = signUp;
-    try {
-      auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(user => console.log('user', user))
-        .catch(error => console.error(error));
-    } catch (e) {
-      console.error(e.message);
-    }
+    // const { email, password } = signUp;
+    // try {
+    //   auth()
+    //     .createUserWithEmailAndPassword(email, password)
+    //     .then(user => console.log('user', user))
+    //     .catch(error => console.error(error));
+    // } catch (e) {
+    //   console.error(e.message);
+    // }
   };
   _registerWithFb = () => {
     const { navigation } = this.props;
