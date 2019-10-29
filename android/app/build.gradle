@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.smartchef.chef"
+        applicationId "com.smartchef"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -179,6 +179,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
