@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.smartchef.chef"
+        applicationId "com.smartchef"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

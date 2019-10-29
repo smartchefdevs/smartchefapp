@@ -9,6 +9,7 @@ import {
 } from 'smartchef/src/components/auth';
 import Label from 'smartchef/src/components/Label'
 import { Colors } from 'smartchef/src/styles/Colors';
+import api from 'smartchef/src/common/api'
 
 class loginScreen extends React.PureComponent {
   static navigationOptions = {
@@ -58,14 +59,18 @@ class loginScreen extends React.PureComponent {
     });
   };
 
-  _logIn = signUp => {
-    // const { email, password } = signUp;
-    // const { navigation } = this.props;
-    // try {
-
-    // } catch (e) {
-    //   console.error(e.message);
-    // }
+  _logIn = async signUp => {
+    const { email, password } = signUp;
+    const { navigation } = this.props;
+    try {
+      const requestLogin = await api.login({ mail: email, pass: password });
+      console.log("response", login)
+      if (requestLogin.ok && requestLogin.status < 300) {
+        navigation.navigate('Home');
+      }
+    } catch (e) {
+      console.error(e.message);
+    }
   };
   _goSignIn = () => {
     const { navigation } = this.props;
