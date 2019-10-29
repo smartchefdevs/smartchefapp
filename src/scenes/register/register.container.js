@@ -11,6 +11,7 @@ import { loginWithFacebook } from 'smartchef/src/common/firebase.auth'
 
 import Label from 'smartchef/src/components/Label';
 import { Colors } from 'smartchef/src/styles/Colors';
+import api from 'smartchef/src/common/api';
 
 class registerScreen extends React.PureComponent {
   static navigationOptions = {
@@ -75,21 +76,21 @@ class registerScreen extends React.PureComponent {
     });
   };
 
-  _signIn = signUp => {
-    // const { email, password } = signUp;
-    // try {
-    //   auth()
-    //     .createUserWithEmailAndPassword(email, password)
-    //     .then(user => console.log('user', user))
-    //     .catch(error => console.error(error));
-    // } catch (e) {
-    //   console.error(e.message);
-    // }
+  _signIn = async signUp => {
+    const { mail, pass, full_name } = signUp;
+    try {
+      const registerChef = await api.registerChef({...signUp, id_profile: 2});
+      console.log("registerchef",registerChef);
+    } catch (e) {
+      console.error(e.message);
+    }
   };
   _registerWithFb = () => {
     const { navigation } = this.props;
     try {
-      loginWithFacebook().then(() => navigation.navigate("Home"));
+      loginWithFacebook()
+        .then(() => navigation.navigate("Home"))
+        .catch(err => console.log("err fb", err));
     } catch (error) {
       console.log('el error FbLoggin', error)
     }
@@ -109,7 +110,7 @@ class registerScreen extends React.PureComponent {
           colors={['#3716d1', '#29128a', '#370551', '#120965']}
         >
           <MainView>
-            <TitleView titlePadding={titlePadding} style={{backgroundColor: 'yellow'}}>
+            <TitleView titlePadding={titlePadding}>
               <Label
                 weight={700}
                 size={titleSize}

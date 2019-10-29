@@ -21,9 +21,11 @@ const create = (baseURL = API_URL) => {
   const setToken = authorization => (authorization ? { headers: { authorization } } : {})
 
   const login = data => api.post('/auth/login/chef', data);
+  const registerChef = data => api.post('/user/create', data);
 
   return {
     login,
+    registerChef
   }
 }
 

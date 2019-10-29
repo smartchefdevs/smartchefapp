@@ -62,16 +62,15 @@ class Form extends React.Component {
     const { errorMessage } = this.props;
     return (
       <View style={styles.container}>
-        {getFieldDecorator('username', {
+        {getFieldDecorator('full_name', {
           validateFirst: true,
           rules: [
             { required: true, message: 'username es requerido' }
           ]
         })(
           <FormItem
-            style={{ backgroundColor: 'red' }}
-            placeholder="Username"
-            error={getFieldError('username')}
+            placeholder="alexander von handler"
+            error={getFieldError('full_name')}
             textContentType="username"
             stylesInput={styles.input}
             autoCapitalize="none"
@@ -79,7 +78,7 @@ class Form extends React.Component {
             onSubmitEditing={() => this._submit()}
           />
         )}
-        {getFieldDecorator('email', {
+        {getFieldDecorator('mail', {
           validateFirst: true,
           rules: [
             { required: true, message: 'Email es requerido' },
@@ -88,7 +87,7 @@ class Form extends React.Component {
         })(
           <FormItem
             placeholder="Email"
-            error={getFieldError('email')}
+            error={getFieldError('mail')}
             textContentType="emailAddress"
             keyboardType="email-address"
             stylesInput={styles.input}
@@ -97,7 +96,7 @@ class Form extends React.Component {
             onSubmitEditing={() => this._submit()}
           />
         )}
-        {getFieldDecorator('password', {
+        {getFieldDecorator('pass', {
           validateFirst: false,
           rules: [
             { type: 'string', required: true, message: 'Password es requerido' }
@@ -105,7 +104,7 @@ class Form extends React.Component {
         })(
           <FormItem
             placeholder="Password"
-            error={getFieldError('password')}
+            error={getFieldError('pass')}
             secure
             textContentType="password"
             stylesInput={styles.input}
@@ -113,6 +112,22 @@ class Form extends React.Component {
             onSubmitEditing={() => this._submit()}
           />
         )}
+        {/* {getFieldDecorator('address', {
+          validateFirst: false,
+          rules: [
+            { type: 'string', required: true, message: 'Password es requerido' }
+          ]
+        })(
+          <FormItem
+            placeholder="ex. calle 23 #34-40"
+            error={getFieldError('address')}
+            secure
+            textContentType="password"
+            stylesInput={styles.input}
+            returnKeyType="done"
+            onSubmitEditing={() => this._submit()}
+          />
+        )} */}
         {errorMessage && (
           <View style={styles.errorView}>
             <Text style={styles.erroMesage}>{errorMessage}</Text>
