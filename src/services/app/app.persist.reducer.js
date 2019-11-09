@@ -5,16 +5,16 @@ import { Map } from 'immutable'
 const { Types, Creators } = createActions({
   setSession: ['sessionData'],
   logout: null,
-  setIsLoggedIn: ['isLoggedIn']
+  setIsLoggedIn: ['isLoggedIn'],
 })
 
-export const AppTypes = Types
-export default Creators
+export const AppTypes = Types;
+export default Creators;
 
 /* ------------- Initial State ------------ - */
 export const INITIAL_STATE = Map({
   sessionData: {},
-  isLoggedIn: false
+  isLoggedIn: false,
 })
 
 /* ------------- Reducers ------------- */
@@ -22,11 +22,13 @@ export const INITIAL_STATE = Map({
 const logout = state => state.merge(Map({
   sessionData: {},
   isLoggedIn: false
-}))
+}));
 
-const setSession = (state, { sessionData }) => state.mergeDeep(Map({ sessionData }))
+const setSession = (state, { sessionData }) =>
+  state.mergeDeep(Map({ sessionData }));
 
-const setIsLoggedIn = (state, { isLoggedIn }) => state.mergeDeep(Map({ isLoggedIn }))
+const setIsLoggedIn = (state, {isLoggedIn}) =>
+  state.mergeDeep(Map({isLoggedIn}));
 
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {

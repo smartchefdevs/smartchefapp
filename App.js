@@ -14,7 +14,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 // Internationalization
 // import { i18n, defaultLocale } from 'pads/app/lang'
 // router
-import initStore from 'pads/app/store'
+import initStore from 'smartchef/src/store';
 import Router from 'smartchef/src/router';
 
 // store.dispatch(i18nActions.setLanguages(i18n.languages))
@@ -27,16 +27,14 @@ const styles = {
     height: '100%',
   },
 };
-const {store, persistor} = initStore();
+const store = initStore();
 
 const App = () => {
   return (
     <View style={styles.appView}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Provider store={store}>
-          <Router />
-        </Provider>
-      </PersistGate>
+      <Provider store={store}>
+        <Router />
+      </Provider>
     </View>
   );
 };
