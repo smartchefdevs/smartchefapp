@@ -22,13 +22,13 @@ const create = (baseURL = API_URL) => {
     authorization ? {headers: {authorization}} : {};
 
   const login = data => api.post('/auth/login/chef', data);
-  const registerChef = data => api.post('/user/create', data);
+  const registeruser = data => api.post('/user/create', data);
 
   return {
     login,
-    registerChef
-  }
-}
+    registeruser,
+  };
+};
 
 // let's return back our create method as the default.
 export default {create};

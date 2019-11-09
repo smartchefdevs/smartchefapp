@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar, Keyboard } from 'react-native';
 import { GoogleSignin } from 'react-native-google-signin';
+import {connect} from 'react-redux';
 
 // components
 import RegisterForm from 'smartchef/src/scenes/register/register.form';
@@ -11,7 +12,9 @@ import { loginWithFacebook } from 'smartchef/src/common/firebase.auth'
 
 import Label from 'smartchef/src/components/Label';
 import { Colors } from 'smartchef/src/styles/Colors';
-import api from 'smartchef/src/common/api';
+
+//actions
+import sessionActions from 'smartchef/src/services/session/session.reducer'
 
 class registerScreen extends React.PureComponent {
   static navigationOptions = {
@@ -28,6 +31,7 @@ class registerScreen extends React.PureComponent {
     this._keyboardDidHide = this._keyboardDidHide.bind();
     this._bootstrap();
   }
+
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -77,19 +81,18 @@ class registerScreen extends React.PureComponent {
   };
 
   _signIn = async signUp => {
-    const { mail, pass, full_name } = signUp;
-    try {
-      const registerChef = await api.registerChef({...signUp, id_profile: 2});
-      console.log("registerchef",registerChef);
-    } catch (e) {
-      console.error(e.message);
-    }
+    const {registerUser} = this.props;
+    registerUser(signUp);
   };
+
   _registerWithFb = () => {
     const { navigation } = this.props;
     try {
       loginWithFacebook()
-        .then(() => navigation.navigate("Home"))
+        .then((user) => {
+          console.log("fbUser", user)
+          navigation.navigate("Home")
+        })
         .catch(err => console.log("err fb", err));
     } catch (error) {
       console.log('el error FbLoggin', error)
@@ -155,4 +158,14 @@ class registerScreen extends React.PureComponent {
   }
 }
 
-export default registerScreen;
+const mapStateToProps = state => ({
+});
+
+const mapStateToDispatch = dispatch => ({
+  registerUser: values => dispatch(sessionActions.register(values)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapStateToDispatch,
+)(registerScreen);
