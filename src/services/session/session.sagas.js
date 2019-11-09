@@ -56,11 +56,10 @@ function* registerUser(api, action) {
   }
 }
 
-
 function* ActionWatcher(api) {
-  yield takeLatest(AppTypes.SET_IS_LOGGED_IN, saveOneSignalToken, api)
-  yield takeLatest(SessionTypes.GET_PROFILE, getProfile, api)
-  yield takeLatest(SessionTypes.REGISTER, registerUser, api)
+  yield takeLatest(AppTypes.SET_IS_LOGGED_IN, saveOneSignalToken, api);
+  yield takeLatest(SessionTypes.GET_PROFILE, getProfile, api);
+  yield takeLatest(SessionTypes.REGISTER, registerUser, api);
 }
 
 export default function* rootSaga(api) {

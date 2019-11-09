@@ -89,8 +89,8 @@ class registerScreen extends React.PureComponent {
     const { navigation } = this.props;
     try {
       loginWithFacebook()
-        .then((user) => {
-          console.log("fbUser", user)
+        .then(({user,resutl}) => {
+          console.log("fbUser", user, resutl)
           navigation.navigate("Home")
         })
         .catch(err => console.log("err fb", err));
