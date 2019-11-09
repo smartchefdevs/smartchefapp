@@ -5,12 +5,11 @@
  * @format
  * @flow
  */
-
+import './src/config/ReactotronConfig'
 import React from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import { i18nActions } from 'redux-react-native-i18n';
-import { PersistGate } from 'redux-persist/integration/react';
 // Internationalization
 // import { i18n, defaultLocale } from 'pads/app/lang'
 // router

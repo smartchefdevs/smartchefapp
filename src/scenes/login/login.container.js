@@ -115,4 +115,4 @@ const mapStateToProps = state => ({
 const mapStateToDispatch = dispatch => ({
   setLogin: (values) => dispatch(sessionActions.setAppCredentials(values))
 })
-export default connect()(loginScreen);
+export default connect(mapStateToProps, mapStateToDispatch)(loginScreen);

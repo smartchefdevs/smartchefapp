@@ -1,6 +1,7 @@
 import {
   put, call, select, all, takeLatest
 } from 'redux-saga/effects'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import Utils from 'smartchef/src/sagas/utils.sagas'
 /** TYPES and Actions */
@@ -12,11 +13,13 @@ import SessionActions, { SessionTypes } from 'smartchef/src/services/session/ses
 const delay = ms => new Promise(res => setTimeout(res, ms))
 
 export function* setAppStatus(api, action) {
+  console.log("ACTIO LOGIN ", action)
   if (action.credentials.mail && action.credentials.pass) {
     try {
       const response = yield call(api.login, action.credentials)
       if (response.ok && response.status < 300) {
         yield put(AppActions.setSession(response.data))
+        yield AsyncStorage.setItem('@smartchefUser', response.data)
         yield put(AppActions.setIsLoggedIn(true))
       } else {
         // if (response.problem === 'NETWORK_ERROR') {

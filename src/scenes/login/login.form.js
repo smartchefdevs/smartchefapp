@@ -62,7 +62,7 @@ class Form extends React.Component {
     const { errorMessage } = this.props;
     return (
       <View style={styles.container}>
-        {getFieldDecorator('mail', {
+        {getFieldDecorator('email', {
           validateFirst: true,
           rules: [
             { required: true, message: 'Email es requerido' },
@@ -80,14 +80,14 @@ class Form extends React.Component {
             onSubmitEditing={() => this.submit()}
           />
         )}
-        {getFieldDecorator('pass', {
+        {getFieldDecorator('password', {
           validateFirst: false,
           rules: [
             { type: 'string', required: true, message: 'Password es requerido' }
           ]
         })(
           <FormItem
-            placeholder="Password"
+            placeholder="password"
             error={getFieldError('password')}
             secureTextEntry
             textContentType="password"
