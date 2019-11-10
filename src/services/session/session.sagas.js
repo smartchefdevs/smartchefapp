@@ -51,7 +51,8 @@ function* registerUser(api, action) {
   const response = yield call(api.registeruser, params, authorization);
   console.tron.log("response",response)
   if (response.ok && response.status < 300) {
-    yield AsyncStorage.setItem('@smartchefUser', response.data);
+    const user = JSON.stringify(response.data.user)
+    yield AsyncStorage.setItem('@smartchefUser',user );
     yield put(AppActions.setSession(response.data));
   }
 }

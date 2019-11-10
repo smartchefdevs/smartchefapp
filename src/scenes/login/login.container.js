@@ -85,7 +85,7 @@ class loginScreen extends React.PureComponent {
                 lineHeight={titleHeight}
                 color={Colors.white}
               >
-                Welcome {'      '}Back!
+                smartchef
               </Label>
             </TitleView>
             <LoginForm onSubmit={this._logIn} />
