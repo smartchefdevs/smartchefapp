@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Button, TouchableOpacity, Image, Text, TextInput, FlatList, StyleSheet } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+// import { FontAwesome } from '@expo/vector-icons';
 import DialogRight from './DialogRight';
 import DialogLeft from './DialogLeft';
 // import Pusher from 'pusher-js/react-native';
@@ -73,7 +73,7 @@ export default class ChatScreen extends Component {
         <View style={styles.footer}>
           <View style={{marginRight: 10}}>
             <TouchableOpacity style={{backgroundColor: '#e25f54', height: 24, width: 30, borderRadius: 6, justifyContent: 'center', alignItems: 'center'}}>
-              <FontAwesome name="plus" size={16} color="white" />
+              {/* <FontAwesome name="plus" size={16} color="white" /> */}
             </TouchableOpacity>
           </View>
           <View style={styles.textInputWrapper}>

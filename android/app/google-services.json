@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:4335751593:android:55e327aecee169e54734b8",
+        "mobilesdk_app_id": "1:4335751593:android:84ed2a97b6cfee734734b8",
         "android_client_info": {
           "package_name": "com.smartchef.custumer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "4335751593-he3chd140a9keaqnbf58cm1q9bjjca2h.apps.googleusercontent.com",
+          "client_id": "4335751593-i7r2ngvvrblel0eflopudj0gtro37oqe.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.smartchef.custumer",
-            "certificate_hash": "73d7d03f16438af87fd2e8c13c3acda29ddb89e7"
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
           }
         },
         {

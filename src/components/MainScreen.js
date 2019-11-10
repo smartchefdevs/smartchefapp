@@ -28,7 +28,7 @@ export default class MainScreen extends Component {
         <View style={styles.filterBtn}>
           <Text style={{fontSize: 18, color: 'white'}}>Filters</Text>
         </View>
-        <Footer />
+        {/* <Footer /> */}
       </View>
     );
   }
@@ -37,7 +37,7 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
   filterBtn: {
     position: 'absolute',
-    bottom: 65,
+    bottom: 10,
     alignSelf: 'center',
     height: 41,
     width: 120,

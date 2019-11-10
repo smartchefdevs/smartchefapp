@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, ImageBackground, Text, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-elements';
 
 export default class HotDealItem extends Component {
   render() {
     const { title, imgSrc } = this.props;
     return (
-      <Image 
+      <ImageBackground 
         style={styles.backgroundImage}
         source={imgSrc}
       >
@@ -14,7 +14,7 @@ export default class HotDealItem extends Component {
           <Text style={styles.coverText}>{title}</Text>
           <Divider styleName='line' style={styles.coverDivider} />
         </View>
-      </Image>
+      </ImageBackground>
     )
   }
 }

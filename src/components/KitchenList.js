@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
+// import { FontAwesome } from '@expo/vector-icons';
 import KitchenSection from './KitchenSection';
 
 export default class KitchenList extends Component {
@@ -60,7 +60,7 @@ export default class KitchenList extends Component {
             <Text style={styles.titleText}>NEARBY KITCHENS</Text>
           </View>
           <View style={styles.sortContainer}>
-            <FontAwesome name='sort-amount-desc' size={12} color='#4285f4' />
+            {/* <FontAwesome name='sort-amount-desc' size={12} color='#4285f4' /> */}
             <Text style={styles.sortText}>DISTANCE</Text>
           </View>
           {KITCHENS.map((kitchen, index) => <KitchenSection

@@ -57,7 +57,7 @@ class FormItem extends React.PureComponent {
             style={[styles.input, { color: themeStyles.color }, stylesInput]}
             value={value || ''}
             onChangeText={onChange}
-            placeholderTextColor={Colors.mediumgray}
+            placeholderTextColor={Colors.white}
             duration={150}
             underlineColorAndroid={Colors.transparent}
             {...this.props}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import { Card } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
+// import { FontAwesome } from '@expo/vector-icons';
 
 const StorySection = () =>
   <Card style={{width: '100%', marginTop: 10}}>
@@ -14,7 +14,7 @@ const StorySection = () =>
           style={{width: 343, height: 166, alignSelf: 'center'}}
           source={require('../img/KungPao.jpg')}
         />
-        <FontAwesome name='bookmark-o' size={20} color='white' style={styles.bookmarkIcon} />
+        {/* <FontAwesome name='bookmark-o' size={20} color='white' style={styles.bookmarkIcon} /> */}
       </View>
       <View style={styles.footerContainer}>
         <Text style={styles.dishTitle}>The Story of Kung Pao Chicken</Text>

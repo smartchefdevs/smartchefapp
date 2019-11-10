@@ -75,8 +75,8 @@ class loginScreen extends React.PureComponent {
     const { titleSize, titleHeight, titlePadding } = this.state;
     return (
       <MainView>
-        <StatusBar barStyle="default" backgroundColor="#3716d1" />
-        <BackgroundView colors={['#3716d1', '#29128a', '#370551', '#120965']}>
+        <StatusBar barStyle="default" backgroundColor="#D71655" />
+        <BackgroundView colors={['#D71655', '#E83D38', '#E32402', '#e25f54']}>
           <MainView>
             <TitleView titlePadding={titlePadding}>
               <Label
@@ -85,7 +85,7 @@ class loginScreen extends React.PureComponent {
                 lineHeight={titleHeight}
                 color={Colors.white}
               >
-                smartchef
+               Welcome to smartchef
               </Label>
             </TitleView>
             <LoginForm onSubmit={this._logIn} />

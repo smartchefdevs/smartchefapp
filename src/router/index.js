@@ -8,6 +8,9 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 // screen
 import LoginScreen from 'smartchef/src/scenes/login/login.container';
 import RegisterScreen from 'smartchef/src/scenes/register/register.container';
+import MainScreen from 'smartchef/src//components/MainScreen';
+// import ChatScreen from 'smartchef/src//components/ChatScreen';
+import DetailScreen from 'smartchef/src//components/DetailScreen';
 // import HomeScreen from 'smartchef/src/scenes/home/home.container';
 // import PublishScreen from 'smartchef/src/scenes/publish/publish.container';
 // import AccountScreen from 'smartchef/src/scenes/account/account.screen';
@@ -51,9 +54,10 @@ const defaultScreen = () => {
 
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: defaultScreen,
+    Home: MainScreen,
     Search: defaultScreen,
-    Account: defaultScreen
+    Detail: DetailScreen,
+    Account: defaultScreen,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
