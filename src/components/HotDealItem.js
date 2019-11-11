@@ -1,23 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, ImageBackground, Text, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-elements';
 
-export default class HotDealItem extends Component {
-  render() {
-    const { title, imgSrc } = this.props;
-    return (
-      <ImageBackground 
-        style={styles.backgroundImage}
-        source={imgSrc}
-      >
-        <View style={styles.coverContainer}>
-          <Text style={styles.coverText}>{title}</Text>
-          <Divider styleName='line' style={styles.coverDivider} />
-        </View>
-      </ImageBackground>
-    )
-  }
-}
+const HotDealItem = ({title, imgSrc}) => {
+  return (
+    <ImageBackground style={styles.backgroundImage} source={{uri: imgSrc}}>
+      <View style={styles.coverContainer}>
+        <Text style={styles.coverText}>{title}</Text>
+        <Divider styleName="line" style={styles.coverDivider} />
+      </View>
+    </ImageBackground>
+  );
+};
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -47,3 +41,5 @@ const styles = StyleSheet.create({
     top: 83.5,
   },
 });
+
+export default HotDealItem;

@@ -11,8 +11,6 @@ const ChefList = ({ chefs, getChefs, navigation }) => {
   useEffect(() => {
     getChefs();
   }, [getChefs]);
-
-  console.tron.log("chefRRR", chefs)
   return (
     <Card style={{ width: '100%', marginTop: 10 }}>
       <View style={{ backgroundColor: 'white' }}>

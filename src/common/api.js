@@ -9,7 +9,7 @@ const create = (baseURL = API_URL) => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-    }
+    },
   });
 
   // if (process.env.NODE_ENV === 'development' && console.tron) {
@@ -22,13 +22,18 @@ const create = (baseURL = API_URL) => {
     authorization ? {headers: {authorization}} : {};
 
   const login = data => api.post('/auth/login/costumer', data);
+
   const registeruser = data => api.post('/user/create', data);
-  const getUsers = id => api.get(`/user/profile/${id}`,{})
+
+  const getUsers = id => api.get(`/user/profile/${id}`);
+
+  const getCategories = () => api.get('/categoryfood/list');
 
   return {
     login,
     registeruser,
-    getUsers
+    getUsers,
+    getCategories,
   };
 };
 

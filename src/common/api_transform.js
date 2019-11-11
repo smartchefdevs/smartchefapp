@@ -37,11 +37,19 @@ const apiToListChef = chefsList => {
     });
     return { ...userCheft, events };
   });
-
-  console.tron.log("arrre", transformChef)
   return transformChef.slice(0, 1);
+};
+
+const apiToCategories = categories => {
+  const transformCategories = categories.map(category => ({
+    key: category.id,
+    name: category.name,
+    image_url: `http://ec2-34-207-127-183.compute-1.amazonaws.com:8000/storage/imgs/category/${category.image_url}`,
+  }));
+  return transformCategories;
 };
 
 export default {
   apiToListChef,
+  apiToCategories,
 };

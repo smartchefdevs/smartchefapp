@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import Header from './Header';
 import StorySection from './StorySection';
-import HotDealSection from './HotDealSection';
+import HotDealSection from 'smartchef/src/containers/Categories.comp.container';
 import ChefsList from 'smartchef/src/containers/chefList/ChefList.comp.container';
 // import Footer from './Footer';
 export default class MainScreen extends Component {
