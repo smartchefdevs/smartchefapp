@@ -15,7 +15,7 @@ import { i18nActions } from 'redux-react-native-i18n';
 // router
 import initStore from 'smartchef/src/store';
 import Router from 'smartchef/src/router';
-
+import NavigationService from 'smartchef/src/navigationService';
 // store.dispatch(i18nActions.setLanguages(i18n.languages))
 // store.dispatch(i18nActions.setDictionaries(i18n.dictionaries))
 // store.dispatch(i18nActions.setCurrentLanguage(defaultLocale))
@@ -32,7 +32,11 @@ const App = () => {
   return (
     <View style={styles.appView}>
       <Provider store={store}>
-        <Router />
+        <Router
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
       </Provider>
     </View>
   );

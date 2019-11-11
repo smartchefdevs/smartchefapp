@@ -25,13 +25,14 @@ export default class DetailScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     return (
       <View style={{flex: 1}}>
         <ScrollView style={{backgroundColor: '#f2f2f2'}}>
           <Card style={{width: '100%'}}>
             <Image
               style={{height: 235, width: '100%'}}
-              source={this.props.navigation.state.params.imageSource}
+              source={navigation.getParam('imageSource')}
             />
             <View style={{height: 120, width: '100%'}}>
               <Text style={{marginTop: 14, marginLeft: 16}}>NAME OF THE DISH</Text>

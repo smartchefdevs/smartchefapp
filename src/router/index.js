@@ -4,13 +4,14 @@ import MdIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createAppContainer, createSwitchNavigator} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import AsyncStorage from '@react-native-community/async-storage';
 
 // screen
 import LoginScreen from 'smartchef/src/scenes/login/login.container';
 import RegisterScreen from 'smartchef/src/scenes/register/register.container';
-import MainScreen from 'smartchef/src//components/MainScreen';
+import MainScreen from 'smartchef/src/components/MainScreen';
 // import ChatScreen from 'smartchef/src//components/ChatScreen';
-import DetailScreen from 'smartchef/src//components/DetailScreen';
+import DetailScreen from 'smartchef/src/components/DetailScreen';
 // import HomeScreen from 'smartchef/src/scenes/home/home.container';
 // import PublishScreen from 'smartchef/src/scenes/publish/publish.container';
 // import AccountScreen from 'smartchef/src/scenes/account/account.screen';
@@ -25,7 +26,7 @@ class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    const userToken = false;
+    const userToken = await AsyncStorage.getItem('@smartchefUser');
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
@@ -56,7 +57,6 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: MainScreen,
     Search: defaultScreen,
-    Detail: DetailScreen,
     Account: defaultScreen,
   },
   {
@@ -99,7 +99,8 @@ export default createAppContainer(
     {
       AuthLoading: AuthLoadingScreen,
       AppMain: TabNavigator,
-      Auth: AuthStack
+      Auth: AuthStack,
+      Detail: DetailScreen,
     },
     {
       initialRouteName: 'AuthLoading'

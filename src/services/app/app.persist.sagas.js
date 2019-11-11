@@ -7,7 +7,7 @@ import Utils from 'smartchef/src/sagas/utils.sagas'
 /** TYPES and Actions */
 import AppActions, { AppTypes } from 'smartchef/src/services/app/app.persist.reducer';
 import SessionActions, { SessionTypes } from 'smartchef/src/services/session/session.reducer';
-
+import NavigationService from 'smartchef/src/navigationService';
 
 // import AnalyticsManager from '../utils/analytics_manager';
 const delay = ms => new Promise(res => setTimeout(res, ms))
@@ -23,11 +23,12 @@ export function* setAppStatus(api, action) {
         yield AsyncStorage.setItem('@smartchefUser', user);
         yield put(AppActions.setSession(response.data));
         yield put(AppActions.setIsLoggedIn(true));
+        NavigationService.navigate('Home', { userName: 'test' });
       } else {
         // if (response.problem === 'NETWORK_ERROR') {
         //   showAlertError('login');
         // }
-        yield put(SessionActions.setErrorMessage(response.data.message))
+        yield put(SessionActions.setErrorMessage(response.data.message));
       }
     } catch (error) {
       // todo sent crash mixpanel

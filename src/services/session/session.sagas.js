@@ -17,13 +17,6 @@ import SessionActions, {
 //   yield put(SessionActions.setErrorMessage(''))
 // }
 
-export function* saveOneSignalToken(api, action) {
-  if (action.isLoggedIn) {
-    const authorization = yield select(Utils.getAuthToken)
-    const token = yield select(Utils.getNotificationsToken)
-    yield call(api.token, authorization, token)
-  }
-}
 
 export function* getProfile(api, action) {
   const authorization = yield select(Utils.getAuthToken)
@@ -49,10 +42,10 @@ function* registerUser(api, action) {
   const params = Object.assign({}, newUser, { id_profile: 3 });
   const authorization = yield select(Utils.getAuthToken);
   const response = yield call(api.registeruser, params, authorization);
-  console.tron.log("response",response)
+  console.tron.log("response", response)
   if (response.ok && response.status < 300) {
-    const user = JSON.stringify(response.data.user)
-    yield AsyncStorage.setItem('@smartchefUser',user );
+    const user = JSON.stringify({ user: response.data.user, token })
+    yield AsyncStorage.setItem('@smartchefUser', user);
     yield put(AppActions.setSession(response.data));
   }
 }

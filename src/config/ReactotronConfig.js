@@ -9,7 +9,7 @@ const { reactotronRedux } = require('reactotron-redux')
 if (__DEV__) {
   Reactotron.configure({
     name: 'smartcheft app',
-    host: '192.168.0.152' // put your ip machine or only work with host module
+    host: '192.168.43.52' // put your ip machine or only work with host module
   })// controls connection & communication settings
     .useReactNative()
     .use(networking())
