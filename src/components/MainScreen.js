@@ -8,9 +8,8 @@ import {
 import Header from './Header';
 import StorySection from './StorySection';
 import HotDealSection from './HotDealSection';
-import KitchenList from './KitchenList';
-import Footer from './Footer';
-
+import ChefsList from 'smartchef/src/containers/chefList/ChefList.comp.container';
+// import Footer from './Footer';
 export default class MainScreen extends Component {
   static navigationOptions = {
     header: null
@@ -23,7 +22,7 @@ export default class MainScreen extends Component {
           <Header />
           <StorySection />
           <HotDealSection />
-          <KitchenList navigation={this.props.navigation} />
+          <ChefsList navigation={this.props.navigation} />
         </ScrollView>
         <View style={styles.filterBtn}>
           <Text style={{fontSize: 18, color: 'white'}}>Filters</Text>

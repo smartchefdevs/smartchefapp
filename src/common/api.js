@@ -23,10 +23,12 @@ const create = (baseURL = API_URL) => {
 
   const login = data => api.post('/auth/login/costumer', data);
   const registeruser = data => api.post('/user/create', data);
+  const getUsers = id => api.get(`/user/profile/${id}`,{})
 
   return {
     login,
     registeruser,
+    getUsers
   };
 };
 

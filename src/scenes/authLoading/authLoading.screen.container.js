@@ -17,7 +17,7 @@ class AuthLoadingScreen extends React.Component {
     const userToken = await AsyncStorage.getItem('@smartchefUser');
     const sessionData = JSON.parse(userToken);
     setSession(sessionData);
-    setIsLoggedIn();
+    setIsLoggedIn(!!userToken);
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
     console.tron.log("usertoken", sessionData);
@@ -41,6 +41,6 @@ const mapStateToProps = state => ({
 
 const mapStateToDispatch = dispatch => ({
   setSession: values => dispatch(AppActions.setSession(values)),
-  setIsLoggedIn: () => dispatch(AppActions.setIsLoggedIn(true)),
+  setIsLoggedIn: (state) => dispatch(AppActions.setIsLoggedIn(state)),
 })
 export default connect(mapStateToProps, mapStateToDispatch)(AuthLoadingScreen);
