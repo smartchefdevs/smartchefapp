@@ -19,7 +19,7 @@ export function* setAppStatus(api, action) {
       const response = yield call(api.login, action.credentials);
       if (response.ok && response.status < 300) {
         yield put(AppActions.setSession(response.data));
-        const user = JSON.stringify(response.data.user);
+        const user = JSON.stringify(response.data);
         yield AsyncStorage.setItem('@smartchefUser', user);
         yield put(AppActions.setSession(response.data));
         yield put(AppActions.setIsLoggedIn(true));

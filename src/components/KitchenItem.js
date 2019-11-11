@@ -4,7 +4,6 @@ import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 export default class KitchenItem extends Component {
   render() {
     const { imgSrc, quantity, index, navigation } = this.props;
-    console.tron.log(imgSrc)
     return (
       <View style={(index !== 0) && {marginLeft: 15}}>
         <TouchableOpacity onPress={() => navigation.navigate('Detail', {imageSource: imgSrc})}>
