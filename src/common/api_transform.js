@@ -1,5 +1,6 @@
 // import _ from 'lodash';
 // import { getRandomArbitrary } from 'smartchef/src/common/utils'
+import { API_URL } from 'smartchef/src/config/environment';
 
 const apiToListChef = chefsList => {
   const transformChef = chefsList.map(chef => {
@@ -40,6 +41,41 @@ const apiToListChef = chefsList => {
   return transformChef.slice(0, 1);
 };
 
+const apiToEvents = events => {
+  console.tron.log("events",events)
+  const transformEvents = events.map(event => {
+    const dishes = event.dishes.map(dish => ({
+      key: dish.id,
+      src: `${API_URL}storage/imgs/food/${dish.image_url}`,
+      name: dish.name,
+      quantity: 3,
+      description: dish.description,
+    }));
+    const wrapper = {
+      key: event.id,
+      image_url: `${API_URL}storage/imgs/event/${event.image_url}`,
+      name: event.name,
+      description: event.description,
+      price: event.price,
+      lat_addr: event.lat_addr,
+      lon_addr: event.lon_addr,
+      address: event.address,
+      reviewsNumber: 'review',
+      openStatus: 'open',
+      distance: '0 km',
+      rate: 1,
+      chef: {
+        key: event.chef.id,
+        avatar: `${API_URL}storage/imgs/user/${event.chef.image_url}`,
+        full_name: event.chef.full_name,
+        address: event.chef.address,
+      },
+    };
+    return {...wrapper, dishes};
+  });
+  return transformEvents;
+};
+
 const apiToCategories = categories => {
   const transformCategories = categories.map(category => ({
     key: category.id,
@@ -52,4 +88,5 @@ const apiToCategories = categories => {
 export default {
   apiToListChef,
   apiToCategories,
+  apiToEvents,
 };

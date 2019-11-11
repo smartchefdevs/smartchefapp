@@ -1,33 +1,47 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import styled from 'styled-components';
 import { Divider } from 'react-native-elements';
+// components
 import KitchenItem from './KitchenItem';
 import StarRateWidget from './StarRateWidget';
+import Label from 'smartchef/src/components/Label';
 
 export default class KitchenSection extends Component {
   render() {
     const { kitchenTitle, kitchenDecription, reviewsNumber, openStatus, chefImage, distance, dishes, rate, isLast, navigation } = this.props;
     return (
-      <View style={(isLast) ? {height: 193, marginBottom: 40} : {height: 193}}>
-        <Divider styleName='line' style={{marginTop: 13, marginLeft: 16, marginRight: 16, width: 343}} />
+      <Section isLast={isLast}>
+        <Divider styleName='line' style={{ marginTop: 13, marginLeft: 16, marginRight: 16, width: 343 }} />
         <View style={styles.kitchenHeader}>
-          <View>
+          <HeaderTextContainer>
             <Text style={styles.kitchenTitle}>{kitchenTitle}</Text>
-            <Text style={styles.kitchenDecription}>{kitchenDecription}</Text>
+            <View>
+              <Label
+                color="#4a4a4a"
+                weight={700}
+                size={'12px'}
+                lineHeight={14}
+                ellipsizeMode="tail"
+                numberOfLines={2}
+              >
+                {kitchenDecription}
+              </Label>
+            </View>
             <View style={styles.kitchenStatusContainer}>
               <StarRateWidget rate={rate} />
-              <Text style={{fontSize: 12, color: '#9b9b9b', lineHeight: 16, marginLeft: 7}}>{reviewsNumber}</Text>
-              <Text style={{fontSize: 12, color: '#8ac96b', lineHeight: 16, marginLeft: 13}}>{openStatus}</Text>
+              <Text style={{ fontSize: 12, color: '#9b9b9b', lineHeight: 16, marginLeft: 7 }}>{reviewsNumber}</Text>
+              <Text style={{ fontSize: 12, color: '#8ac96b', lineHeight: 16, marginLeft: 13 }}>{openStatus}</Text>
             </View>
-          </View>
+          </HeaderTextContainer>
           <Image
             style={styles.chefImage}
-            source={chefImage}
+            source={{ uri: chefImage }}
           />
         </View>
-        <ScrollView horizontal={true} style={{marginTop: 10, marginLeft: 16}}>
-          {dishes.map((item, index) => <KitchenItem
+        <ScrollView horizontal={true} style={{ marginTop: 10, marginLeft: 16 }}>
+          {dishes && dishes.map((item, index) => <KitchenItem
             key={item.key}
             imgSrc={item.src}
             quantity={item.quantity}
@@ -36,11 +50,22 @@ export default class KitchenSection extends Component {
           />)}
         </ScrollView>
         <Text style={styles.distanceText}>{distance}</Text>
-      </View>
+      </Section>
     )
   }
 }
 
+const Section = styled.View`
+  margin-bottom: ${({ isLast }) => (isLast ? '40px' : '3px')};
+  height: 193px;
+`;
+const HeaderTextContainer = styled.View`
+  position: relative;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 6px;
+`;
 const styles = StyleSheet.create({
   kitchenHeader: {
     flexDirection: 'row',
@@ -54,11 +79,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#4a4a4a',
     lineHeight: 19,
-  },
-  kitchenDecription: {
-    fontSize: 12,
-    color: '#4a4a4a',
-    lineHeight: 16,
   },
   kitchenStatusContainer: {
     marginTop: 4,

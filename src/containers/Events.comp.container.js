@@ -5,35 +5,35 @@ import { Card } from 'react-native-elements';
 // import { FontAwesome } from '@expo/vector-icons';
 import KitchenSection from 'smartchef/src/components/KitchenSection';
 // actions
-import ChefsActions from 'smartchef/src/services/chefs/chefs.reducers';
+import EventsActions from 'smartchef/src/services/events/events.reducers';
 
-const ChefList = ({ chefs, getChefs, navigation }) => {
+const ChefList = ({ events, getEvents, navigation }) => {
   useEffect(() => {
-    getChefs();
-  }, [getChefs]);
+    getEvents();
+  }, [getEvents]);
   return (
     <Card style={{ width: '100%', marginTop: 10 }}>
       <View style={{ backgroundColor: 'white' }}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>NEARBY Chefs</Text>
+          <Text style={styles.titleText}>NEARBY Events</Text>
         </View>
         <View style={styles.sortContainer}>
           {/* <FontAwesome name='sort-amount-desc' size={12} color='#4285f4' /> */}
           <Text style={styles.sortText}>DISTANCE</Text>
         </View>
-        {chefs.map((chef, index) => (
+        {events && events.map((event, index) => (
           <KitchenSection
-            key={chef.key}
-            kitchenTitle={chef.full_name}
-            kitchenDecription={chef.decription}
-            reviewsNumber={chef.reviewsNumber}
-            openStatus={chef.openStatus}
-            chefImage={chef.chefImage}
-            distance={chef.distance}
-            dishes={chef.events[0].dishes || []}
-            rate={chef.rate}
+            key={event.key}
+            kitchenTitle={event.name}
+            kitchenDecription={event.description}
+            reviewsNumber={event.reviewsNumber}
+            openStatus={event.openStatus}
+            chefImage={event.chef.avatar}
+            distance={event.distance}
+            dishes={event.dishes}
+            rate={event.rate}
             navigation={navigation}
-            isLast={index === chefs.length - 1}
+            isLast={index === events.length - 1}
           />
         ))}
       </View>
@@ -70,11 +70,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  chefs: state.chefs.get('chefList')
+  events: state.events.get('events'),
 });
 
 const mapStateToDispatch = dispatch => ({
-  getChefs: () => dispatch(ChefsActions.getChefs(2)),
+  getEvents: () => dispatch(EventsActions.getEvents()),
 });
 
 export default connect(

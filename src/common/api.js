@@ -29,11 +29,14 @@ const create = (baseURL = API_URL) => {
 
   const getCategories = () => api.get('/categoryfood/list');
 
+  const getEvents = () => api.get('/event/list');
+
   return {
     login,
     registeruser,
     getUsers,
     getCategories,
+    getEvents,
   };
 };
 

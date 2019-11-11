@@ -9,7 +9,7 @@ export default class KitchenItem extends Component {
         <TouchableOpacity onPress={() => navigation.navigate('Detail', {imageSource: imgSrc})}>
           <Image 
             style={styles.dishImage}
-            source={imgSrc}
+            source={{uri: imgSrc}}
           />
         </TouchableOpacity>
         <Text style={styles.quantityText}>{quantity}</Text>
