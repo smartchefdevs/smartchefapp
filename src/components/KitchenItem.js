@@ -3,13 +3,19 @@ import { View, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
 
 export default class KitchenItem extends Component {
   render() {
-    const { imgSrc, quantity, index, navigation } = this.props;
+    const { imgSrc, quantity, index, navigation, eventId, dish } = this.props;
     return (
-      <View style={(index !== 0) && {marginLeft: 15}}>
-        <TouchableOpacity onPress={() => navigation.navigate('Detail', {imageSource: imgSrc})}>
-          <Image 
+      <View style={(index !== 0) && { marginLeft: 15 }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Detail', {
+            imageSource: imgSrc,
+            eventId,
+            dish,
+          })}
+        >
+          <Image
             style={styles.dishImage}
-            source={{uri: imgSrc}}
+            source={{ uri: imgSrc }}
           />
         </TouchableOpacity>
         <Text style={styles.quantityText}>{quantity}</Text>

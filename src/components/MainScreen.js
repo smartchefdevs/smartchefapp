@@ -12,7 +12,11 @@ import EventList from 'smartchef/src/containers/Events.comp.container';
 // import Footer from './Footer';
 export default class MainScreen extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    headerShown: false,
+    headerStyle:{
+      height: 0,
+    }
   };
   render() {
     const { navigate } = this.props.navigation;
@@ -24,9 +28,9 @@ export default class MainScreen extends Component {
           <HotDealSection />
           <EventList navigation={this.props.navigation} />
         </ScrollView>
-        <View style={styles.filterBtn}>
+        {/* <View style={styles.filterBtn}>
           <Text style={{fontSize: 18, color: 'white'}}>Filters</Text>
-        </View>
+        </View> */}
         {/* <Footer /> */}
       </View>
     );

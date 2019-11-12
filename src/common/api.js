@@ -31,12 +31,15 @@ const create = (baseURL = API_URL) => {
 
   const getEvents = () => api.get('/event/list');
 
+  const getEventDetail = id => api.get(`/event/index/${id}`);
+
   return {
     login,
     registeruser,
     getUsers,
     getCategories,
     getEvents,
+    getEventDetail,
   };
 };
 

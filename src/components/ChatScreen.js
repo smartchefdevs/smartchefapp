@@ -5,6 +5,7 @@ import DialogRight from './DialogRight';
 import DialogLeft from './DialogLeft';
 // import Pusher from 'pusher-js/react-native';
 import VoiceBtn from './VoiceBtn';
+import Label from 'smartchef/src/components/Label';
 
 export default class ChatScreen extends Component {
   constructor() {
@@ -14,7 +15,7 @@ export default class ChatScreen extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // Pusher.logToConsole = false;
     // const pusher = new Pusher('xxxxxxxxxxxxxxxxxxxx', {
     //   encrypted: true
@@ -25,17 +26,17 @@ export default class ChatScreen extends Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      title: `${navigation.state.params.user}`,
-      headerRight: <Image style={{width: 20, height: 20}} source={require('../img/face.png')} />,
-      headerStyle: {paddingRight: 16},
-      headerTitleStyle: {color: '#4a4a4a', height: 20, fontSize: 17},
+      headerTitle: () => <Label>{`${navigation.getParam('user')}`}</Label>,
+      headerRight: () => <Image style={{ width: 20, height: 20 }} source={require('../img/face.png')} />,
+      headerRightContainerStyle: { paddingRight: 16 },
+      headerTitleStyle: { color: '#4a4a4a', height: 20, fontSize: 17 },
       headerTintColor: '#e25f54',
-    }
+    };
   };
 
   _sendMessage(text) {
-    this.setState({dialog: [...this.state.dialog, { role: 'right', text }]});
-    this._textInput.setNativeProps({text: ''});
+    this.setState({ dialog: [...this.state.dialog, { role: 'right', text }] });
+    this._textInput.setNativeProps({ text: '' });
     // fetch('http://localhost:3000/sms-post', {  
     //   method: 'POST',
     //   headers: {
@@ -49,10 +50,10 @@ export default class ChatScreen extends Component {
   }
 
   _receiveMessage(text) {
-    this.setState({dialog: [...this.state.dialog, { role: 'left', text }]});
+    this.setState({ dialog: [...this.state.dialog, { role: 'left', text }] });
   }
 
-  _renderItem = function({item}) {
+  _renderItem = function ({ item }) {
     alert(JSON.stringify(item));
     if (item.role === 'right') {
       return <DialogRight key={item.text} text={item.text} />;
@@ -71,8 +72,8 @@ export default class ChatScreen extends Component {
           />
         </View>
         <View style={styles.footer}>
-          <View style={{marginRight: 10}}>
-            <TouchableOpacity style={{backgroundColor: '#e25f54', height: 24, width: 30, borderRadius: 6, justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity style={{ backgroundColor: '#e25f54', height: 24, width: 30, borderRadius: 6, justifyContent: 'center', alignItems: 'center' }}>
               {/* <FontAwesome name="plus" size={16} color="white" /> */}
             </TouchableOpacity>
           </View>

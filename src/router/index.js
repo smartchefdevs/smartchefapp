@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import MdIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
@@ -10,8 +10,8 @@ import LoginScreen from 'smartchef/src/scenes/login/login.container';
 import RegisterScreen from 'smartchef/src/scenes/register/register.container';
 import MainScreen from 'smartchef/src/components/MainScreen';
 import AuthLoadingScreen from 'smartchef/src/scenes/authLoading/authLoading.screen.container';
-// import ChatScreen from 'smartchef/src//components/ChatScreen';
-import DetailScreen from 'smartchef/src/components/DetailScreen';
+import ChatScreen from 'smartchef/src/components/ChatScreen';
+import DetailScreen from 'smartchef/src/scenes/eventDetail/eventDetail.container';
 // utils
 import { Colors } from 'smartchef/src/styles/Colors';
 
@@ -23,13 +23,21 @@ const defaultScreen = () => {
   );
 };
 
+const MainStack = createStackNavigator({
+  Home: MainScreen,
+},
+  { headerMode: 'none' },
+);
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: MainScreen,
-    Search: defaultScreen,
+    Home: MainStack,
+    Other: defaultScreen,
     Account: defaultScreen,
   },
   {
+    navigationOptions: {
+      headerMode: 'none'
+    },
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
@@ -48,7 +56,8 @@ const TabNavigator = createBottomTabNavigator(
 
         // You can return any component that you like here!
         return <IconComponent name={iconName} size={25} color={tintColor} />;
-      }
+      },
+      headerMode: 'none'
     }),
     tabBarOptions: {
       activeTintColor: Colors.blue,
@@ -64,16 +73,21 @@ const AuthStack = createStackNavigator(
   { headerMode: 'none' }
 );
 
+const HomeStack = createStackNavigator({
+  AppMain: TabNavigator,
+  Detail: DetailScreen,
+  Chat: ChatScreen,
+});
+
 export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
-      AppMain: TabNavigator,
+      AppMain: HomeStack,
       Auth: AuthStack,
-      Detail: DetailScreen,
     },
     {
-      initialRouteName: 'AuthLoading'
-    }
+      initialRouteName: 'AuthLoading',
+    },
   )
 );

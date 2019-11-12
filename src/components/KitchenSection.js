@@ -10,7 +10,7 @@ import Label from 'smartchef/src/components/Label';
 
 export default class KitchenSection extends Component {
   render() {
-    const { kitchenTitle, kitchenDecription, reviewsNumber, openStatus, chefImage, distance, dishes, rate, isLast, navigation } = this.props;
+    const { kitchenTitle, kitchenDecription, reviewsNumber, openStatus, chefImage, distance, dishes, rate, isLast, navigation, eventId } = this.props;
     return (
       <Section isLast={isLast}>
         <Divider styleName='line' style={{ marginTop: 13, marginLeft: 16, marginRight: 16, width: 343 }} />
@@ -42,11 +42,13 @@ export default class KitchenSection extends Component {
         </View>
         <ScrollView horizontal={true} style={{ marginTop: 10, marginLeft: 16 }}>
           {dishes && dishes.map((item, index) => <KitchenItem
+            eventId={eventId}
             key={item.key}
             imgSrc={item.src}
             quantity={item.quantity}
             navigation={navigation}
             index={index}
+            dish={item}
           />)}
         </ScrollView>
         <Text style={styles.distanceText}>{distance}</Text>

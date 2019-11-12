@@ -42,7 +42,6 @@ const apiToListChef = chefsList => {
 };
 
 const apiToEvents = events => {
-  console.tron.log("events",events)
   const transformEvents = events.map(event => {
     const dishes = event.dishes.map(dish => ({
       key: dish.id,
@@ -76,6 +75,37 @@ const apiToEvents = events => {
   return transformEvents;
 };
 
+const apiToEventDetail = eventDetail => {
+  const dishes = eventDetail.dishes.map(dish => ({
+    key: dish.id,
+    src: `${API_URL}storage/imgs/food/${dish.image_url}`,
+    name: dish.name,
+    quantity: 3,
+    description: dish.description,
+  }));
+  const wrapper = {
+    key: eventDetail.id,
+    image_url: `${API_URL}storage/imgs/eventDetail/${eventDetail.image_url}`,
+    name: eventDetail.name,
+    description: eventDetail.description,
+    price: eventDetail.price,
+    lat_addr: eventDetail.lat_addr,
+    lon_addr: eventDetail.lon_addr,
+    address: eventDetail.address,
+    reviewsNumber: 'review',
+    openStatus: 'open',
+    distance: '0 km',
+    rate: 1,
+    chef: {
+      key: eventDetail.chef.id,
+      avatar: `${API_URL}storage/imgs/user/${eventDetail.chef.image_url}`,
+      full_name: eventDetail.chef.full_name,
+      address: eventDetail.chef.address,
+    },
+  };
+  return {...wrapper, dishes};
+};
+
 const apiToCategories = categories => {
   const transformCategories = categories.map(category => ({
     key: category.id,
@@ -89,4 +119,5 @@ export default {
   apiToListChef,
   apiToCategories,
   apiToEvents,
+  apiToEventDetail,
 };

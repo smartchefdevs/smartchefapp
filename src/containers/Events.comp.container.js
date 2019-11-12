@@ -24,6 +24,7 @@ const ChefList = ({ events, getEvents, navigation }) => {
         {events && events.map((event, index) => (
           <KitchenSection
             key={event.key}
+            eventId={event.key}
             kitchenTitle={event.name}
             kitchenDecription={event.description}
             reviewsNumber={event.reviewsNumber}

@@ -19,8 +19,20 @@ function* getListOfEvents(api, action) {
   }
 }
 
+function* getEventDetail(api, action) {
+  const {id} = action;
+  // const authorization = yield select(Utils.getAuthToken);
+  const response = yield call(api.getEventDetail, id);
+  let transform = [];
+  if (response.ok && response.status < 300) {
+    transform = api_transform.apiToEventDetail(response.data.data);
+    yield put(EventsActions.setEventDetail(transform));
+  }
+}
+
 function* ActionWatcher(api) {
   yield takeLatest(EventsTypes.GET_EVENTS, getListOfEvents, api);
+  yield takeLatest(EventsTypes.GET_EVENT_DETAIL, getEventDetail, api);
 }
 
 export default function* rootSaga(api) {
