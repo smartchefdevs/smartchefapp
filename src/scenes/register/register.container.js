@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar, Keyboard } from 'react-native';
-import { GoogleSignin } from 'react-native-google-signin';
+import { GoogleSignin, statusCodes } from 'react-native-google-signin';
+import {connect} from 'react-redux';
 
 // components
 import RegisterForm from 'smartchef/src/scenes/register/register.form';
@@ -11,7 +12,9 @@ import { loginWithFacebook } from 'smartchef/src/common/firebase.auth'
 
 import Label from 'smartchef/src/components/Label';
 import { Colors } from 'smartchef/src/styles/Colors';
-import api from 'smartchef/src/common/api';
+
+//actions
+import sessionActions from 'smartchef/src/services/session/session.reducer'
 
 class registerScreen extends React.PureComponent {
   static navigationOptions = {
@@ -28,6 +31,7 @@ class registerScreen extends React.PureComponent {
     this._keyboardDidHide = this._keyboardDidHide.bind();
     this._bootstrap();
   }
+
   componentDidMount() {
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -45,19 +49,28 @@ class registerScreen extends React.PureComponent {
   _bootstrap = async () => {
     await GoogleSignin.configure({
       scopes: [],
-      webClientId: '58079776345-q62cg4ab53difp5ran5npi0chj6j9kif.apps.googleusercontent.com', // required
+      webClientId: '4335751593-e5pcca1uoh4c4galgk0u13v8o3u24659.apps.googleusercontent.com', // required
     });
   };
   _registerwithGoogle = async () => {
     const { navigation } = this.props;
     try {
-      const { accessToken, idToken } = await GoogleSignin.signIn();
-    
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
       // const user = await auth().signInWithCredential(credential);
       navigation.navigate("Home")
       console.log("el user", user, credential);
     } catch (error) {
-      console.log("error loggin with google", error);
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+      console.tron.log("error",error)
     }
   };
   _keyboardDidShow = () => {
@@ -77,19 +90,18 @@ class registerScreen extends React.PureComponent {
   };
 
   _signIn = async signUp => {
-    const { mail, pass, full_name } = signUp;
-    try {
-      const registerChef = await api.registerChef({...signUp, id_profile: 2});
-      console.log("registerchef",registerChef);
-    } catch (e) {
-      console.error(e.message);
-    }
+    const {registerUser} = this.props;
+    registerUser(signUp);
   };
+
   _registerWithFb = () => {
     const { navigation } = this.props;
     try {
       loginWithFacebook()
-        .then(() => navigation.navigate("Home"))
+        .then(({user,resutl}) => {
+          console.log("fbUser", user, resutl)
+          navigation.navigate("Home")
+        })
         .catch(err => console.log("err fb", err));
     } catch (error) {
       console.log('el error FbLoggin', error)
@@ -99,15 +111,14 @@ class registerScreen extends React.PureComponent {
     const { navigation } = this.props;
     navigation.navigate('SignIn')
   };
-
   render() {
     const { titleSize, titleHeight, titlePadding } = this.state;
     return (
       <MainView>
-        <StatusBar barStyle="default" backgroundColor="#3716d1" />
+        <StatusBar barStyle="default" backgroundColor="#D71655" />
         <BackgroundView
           keyboardShow={titlePadding}
-          colors={['#3716d1', '#29128a', '#370551', '#120965']}
+          colors={['#D71655', '#E83D38', '#E32402', '#e25f54']}
         >
           <MainView>
             <TitleView titlePadding={titlePadding}>
@@ -155,4 +166,14 @@ class registerScreen extends React.PureComponent {
   }
 }
 
-export default registerScreen;
+const mapStateToProps = state => ({
+});
+
+const mapStateToDispatch = dispatch => ({
+  registerUser: values => dispatch(sessionActions.register(values)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapStateToDispatch,
+)(registerScreen);

@@ -1,45 +1,19 @@
 import React from "react";
-import { View, Text, Button, ActivityIndicator, StatusBar } from "react-native";
+import { View, Text } from "react-native";
 import MdIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 // screen
 import LoginScreen from 'smartchef/src/scenes/login/login.container';
 import RegisterScreen from 'smartchef/src/scenes/register/register.container';
-// import HomeScreen from 'smartchef/src/scenes/home/home.container';
-// import PublishScreen from 'smartchef/src/scenes/publish/publish.container';
-// import AccountScreen from 'smartchef/src/scenes/account/account.screen';
+import MainScreen from 'smartchef/src/components/MainScreen';
+import AuthLoadingScreen from 'smartchef/src/scenes/authLoading/authLoading.screen.container';
+import ChatScreen from 'smartchef/src/components/ChatScreen';
+import DetailScreen from 'smartchef/src/scenes/eventDetail/eventDetail.container';
 // utils
 import { Colors } from 'smartchef/src/styles/Colors';
-
-class AuthLoadingScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this._bootstrapAsync();
-  }
-
-  // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    const userToken = false;
-
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
-    console.log("usertoken", userToken);
-    this.props.navigation.navigate(userToken ? 'AppMain' : 'SignIn');
-  };
-
-  // Render any loading content that you like here
-  render() {
-    return (
-      <View>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" backgroundColor="orange" />
-      </View>
-    );
-  }
-}
 
 const defaultScreen = () => {
   return (
@@ -49,13 +23,21 @@ const defaultScreen = () => {
   );
 };
 
+const MainStack = createStackNavigator({
+  Home: MainScreen,
+},
+  { headerMode: 'none' },
+);
 const TabNavigator = createBottomTabNavigator(
   {
-    Home: defaultScreen,
-    Search: defaultScreen,
-    Account: defaultScreen
+    Home: MainStack,
+    Other: defaultScreen,
+    Account: defaultScreen,
   },
   {
+    navigationOptions: {
+      headerMode: 'none'
+    },
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
@@ -74,7 +56,8 @@ const TabNavigator = createBottomTabNavigator(
 
         // You can return any component that you like here!
         return <IconComponent name={iconName} size={25} color={tintColor} />;
-      }
+      },
+      headerMode: 'none'
     }),
     tabBarOptions: {
       activeTintColor: Colors.blue,
@@ -90,15 +73,21 @@ const AuthStack = createStackNavigator(
   { headerMode: 'none' }
 );
 
+const HomeStack = createStackNavigator({
+  AppMain: TabNavigator,
+  Detail: DetailScreen,
+  Chat: ChatScreen,
+});
+
 export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
-      AppMain: TabNavigator,
-      Auth: AuthStack
+      AppMain: HomeStack,
+      Auth: AuthStack,
     },
     {
-      initialRouteName: 'AuthLoading'
-    }
+      initialRouteName: 'AuthLoading',
+    },
   )
 );

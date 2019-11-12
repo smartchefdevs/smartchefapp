@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StatusBar, Keyboard } from 'react-native';
 // import auth from '@react-native-firebase/auth';
 
@@ -9,7 +10,8 @@ import {
 } from 'smartchef/src/components/auth';
 import Label from 'smartchef/src/components/Label'
 import { Colors } from 'smartchef/src/styles/Colors';
-import api from 'smartchef/src/common/api';
+// actions
+import sessionActions from 'smartchef/src/services/session/session.reducer'
 
 class loginScreen extends React.PureComponent {
   static navigationOptions = {
@@ -61,16 +63,8 @@ class loginScreen extends React.PureComponent {
 
   _logIn = async signUp => {
     const { email, password } = signUp;
-    const { navigation } = this.props;
-    try {
-      const requestLogin = await api.login({ mail: email, pass: password });
-      console.log("response", login)
-      if (requestLogin.ok && requestLogin.status < 300) {
-        navigation.navigate('Home');
-      }
-    } catch (e) {
-      console.error(e.message);
-    }
+    const { setLogin } = this.props;
+    setLogin({ mail: email, pass: password });
   };
   _goSignIn = () => {
     const { navigation } = this.props;
@@ -81,8 +75,8 @@ class loginScreen extends React.PureComponent {
     const { titleSize, titleHeight, titlePadding } = this.state;
     return (
       <MainView>
-        <StatusBar barStyle="default" backgroundColor="#3716d1" />
-        <BackgroundView colors={['#3716d1', '#29128a', '#370551', '#120965']}>
+        <StatusBar barStyle="default" backgroundColor="#D71655" />
+        <BackgroundView colors={['#D71655', '#E83D38', '#E32402', '#e25f54']}>
           <MainView>
             <TitleView titlePadding={titlePadding}>
               <Label
@@ -91,7 +85,7 @@ class loginScreen extends React.PureComponent {
                 lineHeight={titleHeight}
                 color={Colors.white}
               >
-                Welcome {'      '}Back!
+               Welcome to smartchef
               </Label>
             </TitleView>
             <LoginForm onSubmit={this._logIn} />
@@ -114,4 +108,11 @@ class loginScreen extends React.PureComponent {
   }
 }
 
-export default loginScreen;
+const mapStateToProps = state => ({
+
+})
+
+const mapStateToDispatch = dispatch => ({
+  setLogin: (values) => dispatch(sessionActions.setAppCredentials(values))
+})
+export default connect(mapStateToProps, mapStateToDispatch)(loginScreen);

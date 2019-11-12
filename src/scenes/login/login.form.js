@@ -87,7 +87,7 @@ class Form extends React.Component {
           ]
         })(
           <FormItem
-            placeholder="Password"
+            placeholder="password"
             error={getFieldError('password')}
             secureTextEntry
             textContentType="password"
